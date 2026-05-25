@@ -1,4 +1,4 @@
-// port-lint: source src/additional_attributes.rs
+// port-lint: source additional_attributes.rs
 /**
  * # Documentation for Additional Attributes
  *
@@ -15,19 +15,19 @@
  *   - `camelCase`
  *   - `PascalCase`
  *   - `kebab-case`
- *   - `snake_case`
+ *   - lower underscore case
  *   - `SCREAMING_SNAKE_CASE`
  *   - `SCREAMING-KEBAB-CASE`
  *   - `lowercase`
  *   - `UPPERCASE`
- *   - `title_case`
- *   - `mixed_case`
+ *   - title case
+ *   - mixed case
  *   - `Train-Case`
  *
  *   ```
  *   // import io.github.kotlinmania.strum.macros.Display
  *
- *   // @Strum(serializeAll="snake_case")
+ *   // @Strum(serializeAll="camelCase")
  *   enum class Brightness {
  *       DarkBlack,
  *       Dim,
@@ -35,7 +35,7 @@
  *       BrightWhite;
  *   }
  *
- *   check("dark_black" == Brightness.DarkBlack.toString())
+ *   check("darkBlack" == Brightness.DarkBlack.toString())
  *   check("dim" == Brightness.Dim.toString())
  *   check("bright" == Brightness.BrightWhite.toString())
  *   ```
@@ -76,9 +76,9 @@
  *    instead of generating one for this variant. Only applicable to enum variants
  *    with a single field. Compatible with the `AsRefStr`, `Display` and
  *    `IntoStaticStr` derive macros. Note that `IntoStaticStr` has a few
- *    restrictions, the value must be program-lifetime constant and `constIntoStr`
- *    is not supported in combination with `transparent` because transparent relies
- *    on a call on `from(variant)`.
+ *    restrictions, the value must remain valid for the duration of the program
+ *    and `constIntoStr` is not supported in combination with `transparent`
+ *    because transparent relies on a call on `from(variant)`.
  *
  * - `disabled`: removes variant from generated code.
  *
