@@ -1,4 +1,6 @@
-// port-lint: source src/lib.rs
+// port-lint: source lib.rs
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+
 /**
  * # Strum
  *
@@ -15,9 +17,11 @@
  *
  * Add `strum-kotlin` and `strum-macros-kotlin` to your dependencies. The
  * `strum-macros-kotlin` artifact provides the runtime helpers and codegen API
- * that stand in for the Rust `strum_macros` derive macros.
+ * that stand in for the upstream derive macros.
  */
 package io.github.kotlinmania.strum
+
+import kotlin.native.HiddenFromObjC
 
 /**
  * The [ParseError] enum is a collection of all the possible reasons
@@ -31,9 +35,15 @@ public enum class ParseError {
     }
 
     /**
+     * Display text for this parse error.
+     */
+    public fun fmt(): String = toString()
+
+    /**
      * Long-form description of the parse error, mirroring the
      * `std::error::Error::description` text in upstream.
      */
+    @HiddenFromObjC
     public fun description(): String = when (this) {
         VARIANT_NOT_FOUND ->
             "Unable to find a variant of the given enum matching the string given. Matching " +
@@ -68,14 +78,17 @@ public enum class ParseError {
  * genericIterator(Color.Red) { color -> println(color) }
  * ```
  */
+@HiddenFromObjC
 public interface IntoEnumIterator<T> {
     public fun iter(): Iterator<T>
 }
 
+@HiddenFromObjC
 public interface VariantIterator<T> {
     public fun iter(): Iterator<T>
 }
 
+@HiddenFromObjC
 public interface VariantMetadata {
     public val variantCount: Int
     public val variantNames: List<String>
@@ -124,6 +137,7 @@ public interface VariantMetadata {
  * check("I have a dog" == myPet.getMessage())
  * ```
  */
+@HiddenFromObjC
 public interface EnumMessage {
     public fun getMessage(): String?
     public fun getDetailedMessage(): String?
@@ -165,6 +179,7 @@ public interface EnumMessage {
  * check(history.getBool("mandatory") == true)
  * ```
  */
+@HiddenFromObjC
 public interface EnumProperty {
     public fun getStr(prop: String): String?
     public fun getInt(prop: String): Long?
@@ -173,13 +188,14 @@ public interface EnumProperty {
 
 /**
  * A cheap reference-to-reference conversion. Used to convert a value to a
- * reference value that lives for the lifetime of the program within generic
- * code.
+ * reference value that remains valid for the duration of the program within
+ * generic code.
  */
 @Deprecated(
     "please use IntoStaticStr derive instead",
     level = DeprecationLevel.WARNING,
 )
+@HiddenFromObjC
 public interface AsStaticRef<T> {
     public fun asStatic(): T
 }
@@ -188,6 +204,7 @@ public interface AsStaticRef<T> {
  * A trait for capturing the number of variants in Enum. This trait can be
  * autoderived by `strum-macros-kotlin`.
  */
+@HiddenFromObjC
 public interface EnumCount {
     public val count: Int
 }
@@ -196,6 +213,7 @@ public interface EnumCount {
  * A trait for retrieving the names of each variant in Enum. This trait can
  * be autoderived by `strum-macros-kotlin`.
  */
+@HiddenFromObjC
 public interface VariantNames {
     /** Names of the variants of this enum */
     public val variantNames: List<String>
@@ -206,6 +224,7 @@ public interface VariantNames {
  * from an associated Type on the original enumeration. This trait can be
  * autoderived by `strum-macros-kotlin`.
  */
+@HiddenFromObjC
 public interface IntoDiscriminant<D> {
     public fun discriminant(): D
 }
@@ -218,6 +237,7 @@ public interface IntoDiscriminant<D> {
  * using it alongside [EnumDiscriminants](io.github.kotlinmania.strum.macros.EnumDiscriminants)
  * if you require inner data but still want to have a static list of variants.
  */
+@HiddenFromObjC
 public interface VariantArray<T> {
     public val variants: List<T>
 }

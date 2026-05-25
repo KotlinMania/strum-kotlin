@@ -10,6 +10,7 @@ class LibTest {
     @Test
     fun parseErrorDisplay() {
         assertEquals("Matching variant not found", ParseError.VARIANT_NOT_FOUND.toString())
+        assertEquals("Matching variant not found", ParseError.VARIANT_NOT_FOUND.fmt())
     }
 
     @Test

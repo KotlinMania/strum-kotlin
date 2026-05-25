@@ -9,6 +9,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.support.serviceOf
 import org.gradle.process.ExecOperations
+import org.gradle.plugins.signing.Sign
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
@@ -32,6 +33,7 @@ val androidCommandLineToolsRevision = "14742923"
 val projectCompileSdk = "34"
 val projectAndroidBuildTools = "36.0.0"
 val isWindowsHost = System.getProperty("os.name").lowercase().contains("windows")
+val isMacHost = System.getProperty("os.name").lowercase().contains("mac")
 val androidSdkOsName =
     when {
         isWindowsHost -> "win"
@@ -404,6 +406,14 @@ mavenPublishing {
     }
 }
 
+val isPublishingToMavenLocal = gradle.startParameter.taskNames.any { taskName ->
+    taskName.contains("MavenLocal", ignoreCase = true)
+}
+
+tasks.withType<Sign>().configureEach {
+    onlyIf { !isPublishingToMavenLocal }
+}
+
 tasks.register("setupAndroidSdk") {
     group = "setup"
     description = "Downloads and configures the project-local Android SDK."
@@ -412,10 +422,54 @@ tasks.register("setupAndroidSdk") {
     }
 }
 
+val swiftExportSmokeTest = tasks.register("swiftExportSmokeTest") {
+    group = "verification"
+    description = "Builds the Swift Export SPM package and runs swift test against it."
+    onlyIf {
+        if (!isMacHost) {
+            logger.lifecycle("swiftExportSmokeTest: skipped because Swift Export smoke tests require macOS")
+        }
+        isMacHost
+    }
+    outputs.upToDateWhen { false }
+
+    doLast {
+        val execOperations = serviceOf<ExecOperations>()
+        val swiftBuildDir = layout.buildDirectory.dir("swift-test").get().asFile.absolutePath
+        execOperations.exec {
+            workingDir = projectDir
+            commandLine(
+                "./gradlew",
+                "embedSwiftExportForXcode",
+                "--no-configuration-cache",
+                "--no-daemon",
+                "--console=plain",
+            )
+            environment(
+                mapOf(
+                    "BUILT_PRODUCTS_DIR" to swiftBuildDir,
+                    "TARGET_BUILD_DIR" to swiftBuildDir,
+                    "SDK_NAME" to "macosx",
+                    "CONFIGURATION" to "Debug",
+                    "ARCHS" to "arm64",
+                    "FRAMEWORKS_FOLDER_PATH" to "Frameworks",
+                    "MACOSX_DEPLOYMENT_TARGET" to "14.0",
+                    "DEPLOYMENT_TARGET_SETTING_NAME" to "MACOSX_DEPLOYMENT_TARGET",
+                ),
+            )
+        }.assertNormalExitValue()
+
+        execOperations.exec {
+            workingDir = layout.projectDirectory.dir("swift-test-harness").asFile
+            commandLine("swift", "test")
+        }.assertNormalExitValue()
+    }
+}
+
 tasks.register("test") {
     group = "verification"
     description =
-        "Runs the host-portable test suite (macOS + JS + WasmJS + Android unit). " +
+        "Runs the host-portable test suite (macOS + JS + WasmJS + Android unit + Swift smoke test). " +
         "Non-host native targets (mingwX64, linuxX64) only run on their own host."
 
     val defaultTestTasks = listOf(
@@ -425,6 +479,7 @@ tasks.register("test") {
         "wasmJsNodeTest",
         "compileAndroidMain",
         "assembleUnitTest",
+        "swiftExportSmokeTest",
     )
 
     dependsOn(defaultTestTasks.mapNotNull { taskName -> tasks.findByName(taskName) })
@@ -560,6 +615,7 @@ val fullTargetBuildTasks = listOf(
     "watchosDeviceArm64TestBinaries",
     "watchosSimulatorArm64Binaries",
     "watchosSimulatorArm64TestBinaries",
+    "swiftExportSmokeTest",
     "embedSwiftExportForXcode",
     "assembleStrumXCFramework",
     "assembleStrumDebugXCFramework",
