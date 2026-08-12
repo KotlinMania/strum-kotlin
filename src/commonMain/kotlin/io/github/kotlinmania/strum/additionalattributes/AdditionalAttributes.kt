@@ -102,3 +102,10 @@
  *    variant.
  */
 package io.github.kotlinmania.strum.additionalattributes
+
+/**
+ * Marker object for the additional-attributes documentation module.
+ * The upstream Rust file is entirely documentation with no runtime code;
+ * this object provides a non-empty declaration so the file is valid Kotlin.
+ */
+internal object AdditionalAttributes

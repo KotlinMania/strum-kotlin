@@ -19,6 +19,7 @@
  * `strum-macros-kotlin` artifact provides the runtime helpers and codegen API
  * that stand in for the upstream derive macros.
  */
+
 package io.github.kotlinmania.strum
 
 import kotlin.native.HiddenFromObjC
@@ -28,11 +29,13 @@ import kotlin.native.HiddenFromObjC
  * an enum can fail to parse from a string.
  */
 public enum class ParseError {
-    VARIANT_NOT_FOUND;
+    VARIANT_NOT_FOUND,
+    ;
 
-    override fun toString(): String = when (this) {
-        VARIANT_NOT_FOUND -> "Matching variant not found"
-    }
+    override fun toString(): String =
+        when (this) {
+            VARIANT_NOT_FOUND -> "Matching variant not found"
+        }
 
     /**
      * Display text for this parse error.
@@ -44,11 +47,12 @@ public enum class ParseError {
      * `std::error::Error::description` text in upstream.
      */
     @HiddenFromObjC
-    public fun description(): String = when (this) {
-        VARIANT_NOT_FOUND ->
-            "Unable to find a variant of the given enum matching the string given. Matching " +
-                "can be extended with the Serialize attribute and is case sensitive."
-    }
+    public fun description(): String =
+        when (this) {
+            VARIANT_NOT_FOUND ->
+                "Unable to find a variant of the given enum matching the string given. Matching " +
+                    "can be extended with the Serialize attribute and is case sensitive."
+        }
 }
 
 /**
@@ -140,10 +144,12 @@ public interface VariantMetadata {
 @HiddenFromObjC
 public interface EnumMessage {
     public fun getMessage(): String?
+
     public fun getDetailedMessage(): String?
 
     /** Get the doc comment associated with a variant if it exists. */
     public fun getDocumentation(): String?
+
     public fun getSerializations(): List<String>
 }
 
@@ -182,7 +188,9 @@ public interface EnumMessage {
 @HiddenFromObjC
 public interface EnumProperty {
     public fun getStr(prop: String): String?
+
     public fun getInt(prop: String): Long?
+
     public fun getBool(prop: String): Boolean?
 }
 

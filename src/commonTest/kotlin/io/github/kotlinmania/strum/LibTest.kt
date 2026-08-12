@@ -6,7 +6,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LibTest {
-
     @Test
     fun parseErrorDisplay() {
         assertEquals("Matching variant not found", ParseError.VARIANT_NOT_FOUND.toString())
@@ -99,7 +98,6 @@ class LibTest {
         assertEquals("2:30", science.getStr("Time"))
         assertEquals(true, science.getBool("mandatory"))
     }
-
 }
 
 private enum class TestColor :
@@ -110,12 +108,16 @@ private enum class TestColor :
     VariantNames,
     VariantArray<TestColor>,
     IntoDiscriminant<String> {
-    RED, GREEN, BLUE;
+    RED,
+    GREEN,
+    BLUE,
+    ;
 
     override fun iter(): Iterator<TestColor> = entries.iterator()
 
     override val variantCount: Int = 3
     override val variantNames: List<String> = listOf("RED", "GREEN", "BLUE")
+
     override fun variantName(): String = name
 
     override val count: Int = 3
@@ -126,22 +128,26 @@ private enum class TestColor :
 
 private enum class TestPet : EnumMessage {
     DOG,
-    CAT;
+    CAT,
+    ;
 
-    override fun getMessage(): String? = when (this) {
-        DOG -> "I have a dog"
-        CAT -> "I don't have a cat"
-    }
+    override fun getMessage(): String? =
+        when (this) {
+            DOG -> "I have a dog"
+            CAT -> "I don't have a cat"
+        }
 
-    override fun getDetailedMessage(): String? = when (this) {
-        DOG -> "My dog's name is Spots"
-        CAT -> "I don't have a cat"
-    }
+    override fun getDetailedMessage(): String? =
+        when (this) {
+            DOG -> "My dog's name is Spots"
+            CAT -> "I don't have a cat"
+        }
 
-    override fun getDocumentation(): String? = when (this) {
-        DOG -> null
-        CAT -> "I am documented."
-    }
+    override fun getDocumentation(): String? =
+        when (this) {
+            DOG -> null
+            CAT -> "I am documented."
+        }
 
     override fun getSerializations(): List<String> = listOf(name)
 }
@@ -149,23 +155,27 @@ private enum class TestPet : EnumMessage {
 private enum class TestClass : EnumProperty {
     HISTORY,
     MATHEMATICS,
-    SCIENCE;
+    SCIENCE,
+    ;
 
-    override fun getStr(prop: String): String? = when (this) {
-        HISTORY -> mapOf("Teacher" to "Ms.Frizzle", "Room" to "201")[prop]
-        MATHEMATICS -> mapOf("Teacher" to "Mr.Smith", "Room" to "103")[prop]
-        SCIENCE -> mapOf("Time" to "2:30")[prop]
-    }
+    override fun getStr(prop: String): String? =
+        when (this) {
+            HISTORY -> mapOf("Teacher" to "Ms.Frizzle", "Room" to "201")[prop]
+            MATHEMATICS -> mapOf("Teacher" to "Mr.Smith", "Room" to "103")[prop]
+            SCIENCE -> mapOf("Time" to "2:30")[prop]
+        }
 
-    override fun getInt(prop: String): Long? = when (this) {
-        HISTORY -> mapOf("students" to 16L)[prop]
-        MATHEMATICS -> mapOf("students" to 10L)[prop]
-        SCIENCE -> null
-    }
+    override fun getInt(prop: String): Long? =
+        when (this) {
+            HISTORY -> mapOf("students" to 16L)[prop]
+            MATHEMATICS -> mapOf("students" to 10L)[prop]
+            SCIENCE -> null
+        }
 
-    override fun getBool(prop: String): Boolean? = when (this) {
-        HISTORY -> mapOf("mandatory" to true)[prop]
-        MATHEMATICS -> null
-        SCIENCE -> mapOf("mandatory" to true)[prop]
-    }
+    override fun getBool(prop: String): Boolean? =
+        when (this) {
+            HISTORY -> mapOf("mandatory" to true)[prop]
+            MATHEMATICS -> null
+            SCIENCE -> mapOf("mandatory" to true)[prop]
+        }
 }
