@@ -5,9 +5,9 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 2/2 (100.0%)
-- **Function parity:** 2/2 matched (target 3) — 100.0%
-- **Class/type parity:** 11/11 matched (target 11) — 100.0%
-- **Combined symbol parity:** 13/13 matched (target 14) — 100.0%
+- **Function parity:** 2/2 matched (target 23) — 100.0%
+- **Class/type parity:** 11/11 matched (target 16) — 100.0%
+- **Combined symbol parity:** 13/13 matched (target 39) — 100.0%
 - **Average inline-code cosine:** 0.48 (function body across 1 matched files)
 - **Average documentation cosine:** 0.86 (doc text across 1 matched files)
 - **Cheat-zeroed Files:** 0
@@ -33,9 +33,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.48
 - **Dependents:** 0
 - **Priority Score:** 1305.2
-- **Functions:** 2/2 matched (target 3)
+- **Functions:** 2/2 matched (target 23)
 - **Missing functions:** _none_
-- **Types:** 11/11 matched
+- **Types:** 11/11 matched (target 15)
 - **Missing types:** _none_
 
 ### 2. additional_attributes
@@ -46,7 +46,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 0.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
-- **Types:** 0/0 matched
+- **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
 ## Success Criteria
@@ -57,3 +57,4 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
