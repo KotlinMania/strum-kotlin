@@ -1,4 +1,4 @@
-// port-lint: ignore
+// port-lint: tests lib.rs
 // Kotlin smoke tests for the ParseError enum and trait surface in src/lib.rs.
 package io.github.kotlinmania.strum
 
