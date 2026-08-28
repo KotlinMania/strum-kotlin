@@ -5,6 +5,6 @@ import Strum
 struct StrumExportTests {
     @Test("Strum Swift module imports cleanly")
     func swiftModuleLoads() {
-        #expect(true)
+        #expect(Bool(true))
     }
 }
