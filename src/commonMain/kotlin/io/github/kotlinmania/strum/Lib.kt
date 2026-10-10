@@ -49,9 +49,10 @@ public enum class ParseError {
     @HiddenFromObjC
     public fun description(): String =
         when (this) {
-            VARIANT_NOT_FOUND ->
+            VARIANT_NOT_FOUND -> {
                 "Unable to find a variant of the given enum matching the string given. Matching " +
                     "can be extended with the Serialize attribute and is case sensitive."
+            }
         }
 }
 
