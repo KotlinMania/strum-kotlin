@@ -23,6 +23,7 @@
 package io.github.kotlinmania.strum
 
 import kotlin.native.HiddenFromObjC
+import io.github.kotlinmania.strummacros.helpers.nonEnumError as upstreamNonEnumError
 
 /**
  * The [ParseError] enum is a collection of all the possible reasons
@@ -249,4 +250,13 @@ public interface IntoDiscriminant<D> {
 @HiddenFromObjC
 public interface VariantArray<T> {
     public val variants: List<T>
+}
+
+/**
+ * Helpers from published `strum-macros-kotlin`.
+ */
+@HiddenFromObjC
+public object MacroHelpers {
+    /** Helper error produced when deriving on non-enum types. */
+    public fun nonEnumError(): Any = upstreamNonEnumError()
 }
