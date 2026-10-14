@@ -1,114 +1,35 @@
-# strum-kotlin in Kotlin
+# Strum Kotlin
 
-[![GitHub link](https://img.shields.io/badge/GitHub-KotlinMania%2Fstrum--kotlin-blue.svg)](https://github.com/KotlinMania/strum-kotlin)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.kotlinmania/strum-kotlin)](https://central.sonatype.com/artifact/io.github.kotlinmania/strum-kotlin)
-[![Build status](https://img.shields.io/github/actions/workflow/status/KotlinMania/strum-kotlin/ci.yml?branch=main)](https://github.com/KotlinMania/strum-kotlin/actions)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.kotlinmania/strum-kotlin?color=blue&style=flat-square)](https://central.sonatype.com/artifact/io.github.kotlinmania/strum-kotlin)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/KotlinMania/strum-kotlin/ci.yml?branch=main&style=flat-square)](https://github.com/KotlinMania/strum-kotlin/actions)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.4%2B-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Platforms](https://img.shields.io/badge/Platforms-JVM%20%7C%20Android%20%7C%20Apple%20%7C%20Linux%20%7C%20Windows%20%7C%20JS%20%7C%20Wasm-orange?style=flat-square)](https://github.com/KotlinMania/strum-kotlin)
+[![Swift Export](https://img.shields.io/badge/Swift_Export-Supported-F05138?style=flat-square&logo=swift&logoColor=white)](https://github.com/KotlinMania/strum-kotlin)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-This is a Kotlin Multiplatform line-by-line transliteration port of [`Peternator7/strum`](https://github.com/Peternator7/strum).
+**Strum Kotlin** provides rich tools, annotations, and runtime extensions for working with enums and strings in Kotlin Multiplatform.
 
-**Original Project:** This port is based on [`Peternator7/strum`](https://github.com/Peternator7/strum). All design credit and project intent belong to the upstream authors; this repository is a faithful port to Kotlin Multiplatform with no behavioural changes intended.
-
-### Porting status
-
-This is an **in-progress port**. The goal is feature parity with the upstream Rust crate while providing a native Kotlin Multiplatform API. Every Kotlin file carries a `// port-lint: source <path>` header naming its upstream Rust counterpart so the AST-distance tool can track provenance.
-
----
-
-## Upstream README — `Peternator7/strum`
-
-> The text below is reproduced and lightly edited from [`https://github.com/Peternator7/strum`](https://github.com/Peternator7/strum). It is the upstream project's own description and remains under the upstream authors' authorship; links have been rewritten to absolute upstream URLs so they continue to resolve from this repository.
-
-## Strum
-
-[![Rust](https://github.com/Peternator7/strum/actions/workflows/ci.yml/badge.svg)](https://github.com/Peternator7/strum/actions/workflows/ci.yml)
-[![Latest Version](https://img.shields.io/crates/v/strum.svg)](https://crates.io/crates/strum)
-[![Rust Documentation](https://docs.rs/strum/badge.svg)](https://docs.rs/strum)
-![Crates.io](https://img.shields.io/crates/l/strum)
-![Crates.io](https://img.shields.io/crates/d/strum)
-
-Strum is a set of macros and traits for working with enums and strings easier in Rust.
-
-# Compatibility
-
-Strum is currently compatible with versions of rustc >= 1.71.1. Pull Requests that improve compatibility with older
-versions are welcome. The project goal is to support a rust version for at least 2 years after release 
-and even longer is preferred since this project changes slowly.
-
-# Including Strum in Your Project
-
-Import strum and strum_macros into your project by adding the following lines to your
-Cargo.toml. Strum_macros contains the macros needed to derive all the traits in Strum.
-
-```toml
-[dependencies]
-strum = "0.28"
-strum_macros = "0.28"
-
-# You can also use the "derive" feature, and import the macros directly from "strum"
-# strum = { version = "0.28", features = ["derive"] }
-```
-
-# Strum Macros
-
-Strum has implemented the following macros:
-
-| Macro | Description |
-| --- | ----------- |
-| [EnumString] | Converts strings to enum variants based on their name. |
-| [Display] | Converts enum variants to strings |
-| [FromRepr] | Convert from an integer to an enum. |
-| [AsRefStr] | Implement `AsRef<str>` for `MyEnum` |
-| [IntoStaticStr] | Implements `From<MyEnum> for &'static str` on an enum |
-| [EnumIter] | Creates a new type that iterates of the variants of an enum. |
-| [EnumProperty] | Add custom properties to enum variants. |
-| [EnumMessage] | Add a verbose message to an enum variant. |
-| [EnumDiscriminants] | Generate a new type with only the discriminant names. |
-| [EnumCount] | Add a constant `usize` equal to the number of variants. |
-| [VariantArray] | Adds an associated `VARIANTS` constant which is an array of all enum discriminants |
-| [VariantNames] | Adds an associated `VARIANTS` constant which is an array of discriminant names |
-
-# Contributing
-
-Thanks for your interest in contributing. Bug fixes are always welcome. If you are interested in implementing or
-adding a macro, please open an issue first to discuss the feature. I have limited bandwidth to review new features.
-
-The project is divided into 3 parts, the traits are in the
-`/strum` folder. The procedural macros are in the `/strum_macros` folder, and the integration tests are
-in `/strum_tests`. If you are adding additional features to `strum` or `strum_macros`, you should make sure
-to run the tests and add new integration tests to make sure the features work as expected.
-
-# Debugging
-
-To see the generated code, set the STRUM_DEBUG environment variable before compiling your code.
-`STRUM_DEBUG=1` will dump all of the generated code for every type. `STRUM_DEBUG=YourType` will
-only dump the code generated on a type named `YourType`.
-
-# Name
-
-Strum is short for STRing enUM because it's a library for augmenting enums with additional
-information through strings.
-
-Strumming is also a very whimsical motion, much like writing Rust code.
-
-[EnumString]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumString.html
-[Display]: https://docs.rs/strum_macros/latest/strum_macros/derive.Display.html
-[AsRefStr]: https://docs.rs/strum_macros/latest/strum_macros/derive.AsRefStr.html
-[IntoStaticStr]: https://docs.rs/strum_macros/latest/strum_macros/derive.IntoStaticStr.html
-[EnumIter]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumIter.html
-[EnumIs]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumIs.html
-[EnumProperty]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumProperty.html
-[EnumMessage]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumMessage.html
-[EnumDiscriminants]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumDiscriminants.html
-[EnumCount]: https://docs.rs/strum_macros/latest/strum_macros/derive.EnumCount.html
-[FromRepr]: https://docs.rs/strum_macros/latest/strum_macros/derive.FromRepr.html
-[VariantArray]: https://docs.rs/strum_macros/latest/strum_macros/derive.VariantArray.html
-[VariantNames]: https://docs.rs/strum_macros/latest/strum_macros/derive.VariantNames.html
+Whether you need string parsing with aliases, case conversions (`kebab-case`, `snake_case`, `camelCase`, etc.), variant metadata and documentation, or property lookups, Strum Kotlin brings clean, type-safe enum capabilities across all platforms.
 
 ---
 
-## About this Kotlin port
+## Features
 
-### Installation
+- **Type-Safe String Parsing**: Robust enum parsing (`fromString`, `fromStringOrNull`) supporting custom serializations, aliases, and case-insensitivity.
+- **Case Conversion Engine**: Comprehensive `CaseStyle` transformations matching Strum/Heck (`camelCase`, `PascalCase`, `kebab-case`, `snake_case`, `SCREAMING_SNAKE_CASE`, `SCREAMING-KEBAB-CASE`, `lowercase`, `UPPERCASE`, `title_case`, `Train-Case`).
+- **Variant Messages & Docs**: Attach user-facing messages, detailed descriptions, and structured documentation to enum variants via `EnumMessage`.
+- **Variant Properties**: Store string, numeric, and boolean properties directly with enum entries via `EnumProperty`.
+- **Idiomatic Iteration & Counting**: Generic reified helpers for iterating (`enumIter`), counting (`enumCount`), retrieving names (`enumVariantNames`), and ordinal indexing (`fromRepr`).
+- **Annotations**: Declarative `@Strum`, `@StrumDiscriminants`, and `@StrumProp` annotations to configure serialization, display formatting, and properties.
+- **Swift & Native Interop**: Fully compatible with Kotlin 2.4 Swift Export and Apple SPM / XCFramework packaging.
+
+---
+
+## Installation
+
+Add `strum-kotlin` to your project dependencies:
+
+### Gradle (Kotlin DSL)
 
 ```kotlin
 dependencies {
@@ -116,34 +37,220 @@ dependencies {
 }
 ```
 
-### Building
+### Version Catalog (`gradle/libs.versions.toml`)
 
-```bash
-./gradlew build
-./gradlew test
+```toml
+[versions]
+strum = "0.2.0"
+
+[libraries]
+strum-kotlin = { module = "io.github.kotlinmania:strum-kotlin", version.ref = "strum" }
 ```
 
-### Targets
+---
 
-- macOS arm64
-- Linux x64
-- Windows mingw-x64
-- iOS arm64 / simulator-arm64 (Swift export + XCFramework)
-- JS (browser + Node.js)
-- Wasm-JS (browser + Node.js)
-- Android (API 24+)
+## Quick Start & Usage
 
-### Porting guidelines
+### 1. Parsing Enums from Strings
 
-See [AGENTS.md](AGENTS.md) for translator discipline, port-lint header convention, and Rust → Kotlin idiom mapping.
+Strum provides `fromString<E>()` and `fromStringOrNull<E>()` to parse enum entries safely:
 
-### License
+```kotlin
+import io.github.kotlinmania.strum.fromString
+import io.github.kotlinmania.strum.fromStringOrNull
+import io.github.kotlinmania.strum.ParseException
 
-This Kotlin port is distributed under the same MIT license as the upstream [`Peternator7/strum`](https://github.com/Peternator7/strum). See [LICENSE](LICENSE) (and any sibling `LICENSE-*` / `NOTICE` files mirrored from upstream) for the full text.
+enum class Status {
+    ACTIVE,
+    INACTIVE,
+    PENDING,
+}
 
-Original work copyrighted by the strum authors.  
-Kotlin port: Copyright (c) 2026 Sydney Renee and The Solace Project.
+// Case-sensitive parsing
+val active = fromString<Status>("ACTIVE")
 
-### Acknowledgments
+// Case-insensitive parsing
+val pending = fromString<Status>("pending", ignoreCase = true)
 
-Thanks to the [`Peternator7/strum`](https://github.com/Peternator7/strum) maintainers and contributors for the original Rust implementation. This port reproduces their work in Kotlin Multiplatform; bug reports about upstream design or behavior should go to the upstream repository.
+// Safe nullable parsing
+val unknown = fromStringOrNull<Status>("UNKNOWN") // null
+
+// Throws ParseException when not found
+try {
+    fromString<Status>("INVALID")
+} catch (e: ParseException) {
+    println("Parse failed: ${e.error}") // ParseError.VARIANT_NOT_FOUND
+}
+```
+
+### 2. Case Conversion (`CaseStyle`)
+
+Easily convert enum variant names or strings into any supported case style:
+
+```kotlin
+import io.github.kotlinmania.strum.CaseStyle
+
+val name = "DarkBlack"
+
+println(CaseStyle.KEBAB_CASE.convert(name))           // "dark-black"
+println(CaseStyle.SNAKE_CASE.convert(name))           // "dark_black"
+println(CaseStyle.CAMEL_CASE.convert(name))           // "darkBlack"
+println(CaseStyle.TITLE_CASE.convert(name))           // "Dark Black"
+println(CaseStyle.SCREAMING_SNAKE_CASE.convert(name)) // "DARK_BLACK"
+println(CaseStyle.TRAIN_CASE.convert(name))           // "Dark-Black"
+```
+
+You can also use `@Strum(serializeAll = "...")` to configure enum formatting:
+
+```kotlin
+import io.github.kotlinmania.strum.Strum
+import io.github.kotlinmania.strum.CaseStyle
+
+@Strum(serializeAll = "kebab-case")
+enum class ThemeColor {
+    DARK_BLACK,
+    BRIGHT_WHITE;
+
+    override fun toString(): String = CaseStyle.KEBAB_CASE.convert(name)
+}
+
+println(ThemeColor.DARK_BLACK) // "dark-black"
+```
+
+### 3. Enum Messages & Documentation (`EnumMessage`)
+
+Attach user-facing messages, detailed explanations, and documentation to enum variants:
+
+```kotlin
+import io.github.kotlinmania.strum.EnumMessage
+import io.github.kotlinmania.strum.StrumEntry
+import io.github.kotlinmania.strum.Strum
+
+enum class Pet(
+    entry: StrumEntry,
+) : EnumMessage by entry {
+    @Strum(message = "I have a dog", detailedMessage = "My dog's name is Spots")
+    DOG(
+        StrumEntry(
+            message = "I have a dog",
+            detailedMessage = "My dog's name is Spots",
+        )
+    ),
+
+    /** Documented feline */
+    @Strum(message = "I have a cat")
+    CAT(
+        StrumEntry(
+            message = "I have a cat",
+            documentation = "Documented feline",
+        )
+    );
+}
+
+val pet = Pet.DOG
+println(pet.getMessage())         // "I have a dog"
+println(pet.getDetailedMessage()) // "My dog's name is Spots"
+```
+
+### 4. Variant Properties (`EnumProperty`)
+
+Store typed metadata alongside enum variants and retrieve them dynamically:
+
+```kotlin
+import io.github.kotlinmania.strum.EnumProperty
+import io.github.kotlinmania.strum.StrumEntry
+import io.github.kotlinmania.strum.Strum
+
+enum class Course(
+    entry: StrumEntry,
+) : EnumProperty by entry {
+    @Strum(props = ["Teacher=Ms. Frizzle", "Room=201", "credits=4", "mandatory=true"])
+    SCIENCE(
+        StrumEntry(
+            properties = mapOf(
+                "Teacher" to "Ms. Frizzle",
+                "Room" to "201",
+                "credits" to 4L,
+                "mandatory" to true,
+            )
+        )
+    );
+}
+
+val course = Course.SCIENCE
+val teacher: String? = course.getStr("Teacher")    // "Ms. Frizzle"
+val credits: Long? = course.getInt("credits")      // 4L
+val isMandatory: Boolean? = course.getBool("mandatory") // true
+```
+
+### 5. Iteration, Counting, and Ordinals
+
+Use reified extension functions for fast, idiomatic access:
+
+```kotlin
+import io.github.kotlinmania.strum.enumCount
+import io.github.kotlinmania.strum.enumIter
+import io.github.kotlinmania.strum.enumVariantArray
+import io.github.kotlinmania.strum.enumVariantNames
+import io.github.kotlinmania.strum.fromRepr
+
+enum class Priority { LOW, MEDIUM, HIGH }
+
+// Number of variants
+val count = enumCount<Priority>() // 3
+
+// Iterate over variants
+for (p in enumIter<Priority>()) {
+    println(p)
+}
+
+// List of variant names
+val names = enumVariantNames<Priority>() // ["LOW", "MEDIUM", "HIGH"]
+
+// Array of variants
+val array = enumVariantArray<Priority>()
+
+// Lookup by ordinal
+val medium = fromRepr<Priority>(1) // Priority.MEDIUM
+```
+
+---
+
+## Supported Targets
+
+Strum Kotlin supports all current Kotlin Multiplatform targets:
+
+| Category | Target Platforms |
+|---|---|
+| **JVM & Android** | JVM (Java 21+), Android (API 24+) |
+| **Apple (Darwin)** | macOS (arm64), iOS (arm64, simulator-arm64), tvOS (arm64, simulator-arm64), watchOS (device, simulator) |
+| **Native Desktop & Server** | Linux (x64, arm64), Windows (mingw-x64) |
+| **Web** | JavaScript (Node.js & Browser), Wasm-JS, Wasm-WASI |
+
+---
+
+## Building & Testing
+
+To compile and verify locally:
+
+```bash
+# Run tests across all active targets
+./gradlew test
+
+# Full multiplatform build, verification, and lint checks
+./gradlew build
+```
+
+---
+
+## Provenance & Acknowledgments
+
+`strum-kotlin` is an idiomatic Kotlin Multiplatform port inspired by [`Peternator7/strum`](https://github.com/Peternator7/strum). All original crate concepts belong to Peter Glotfelty and the upstream contributors.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+Original work Copyright (c) the strum authors.  
+Kotlin port Copyright (c) 2026 Sydney Renee and The Solace Project.
