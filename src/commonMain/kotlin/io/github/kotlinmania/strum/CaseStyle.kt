@@ -1,4 +1,3 @@
-// port-lint: source additional_attributes.rs
 @file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 package io.github.kotlinmania.strum

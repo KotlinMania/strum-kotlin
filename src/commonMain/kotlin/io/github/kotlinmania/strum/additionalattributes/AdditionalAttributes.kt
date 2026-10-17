@@ -1,4 +1,6 @@
 // port-lint: source additional_attributes.rs
+package io.github.kotlinmania.strum.additionalattributes
+
 /**
  * # Documentation for Additional Attributes
  *
@@ -101,11 +103,6 @@
  * - `props(key="value")`: Enables associating additional information with a given
  *    variant.
  */
-package io.github.kotlinmania.strum.additionalattributes
-
-/**
- * Marker object for the additional-attributes documentation module.
- * The upstream Rust file is entirely documentation with no runtime code;
- * this object provides a non-empty declaration so the file is valid Kotlin.
- */
-internal object AdditionalAttributes
+internal object AdditionalAttributes {
+    public const val DOC: String = "Documentation for Additional Attributes"
+}
