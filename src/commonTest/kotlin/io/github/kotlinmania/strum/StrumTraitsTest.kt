@@ -1,11 +1,10 @@
-// port-lint: tests lib.rs
-// Kotlin smoke tests for the ParseError enum and trait surface in src/lib.rs.
+// Kotlin smoke tests for the ParseError enum and trait surface in strum.
 package io.github.kotlinmania.strum
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class LibTest {
+class StrumTraitsTest {
     @Test
     fun parseErrorDisplay() {
         assertEquals("Matching variant not found", ParseError.VARIANT_NOT_FOUND.toString())
