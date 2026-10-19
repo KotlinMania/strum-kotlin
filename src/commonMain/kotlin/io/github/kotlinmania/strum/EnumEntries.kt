@@ -1,13 +1,8 @@
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.strum
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * Standard implementation of [EnumMessage] and [EnumProperty] for enum variants.
  */
-@HiddenFromObjC
 public open class StrumEntry(
     private val message: String? = null,
     private val detailedMessage: String? = null,
@@ -50,8 +45,7 @@ public open class StrumEntry(
 /**
  * Creates an [EnumProperty] from a map of property keys and values.
  */
-@HiddenFromObjC
-public fun Map<String, Any>.asEnumProperty(): EnumProperty =
+internal fun Map<String, Any>.asEnumProperty(): EnumProperty =
     object : EnumProperty {
         override fun getStr(prop: String): String? =
             when (val v = this@asEnumProperty[prop]) {
@@ -75,10 +69,3 @@ public fun Map<String, Any>.asEnumProperty(): EnumProperty =
                 else -> null
             }
     }
-
-/**
- * Creates an [EnumProperty] from key-value pairs.
- */
-@HiddenFromObjC
-public fun enumPropertiesOf(vararg pairs: Pair<String, Any>): EnumProperty =
-    pairs.toMap().asEnumProperty()
