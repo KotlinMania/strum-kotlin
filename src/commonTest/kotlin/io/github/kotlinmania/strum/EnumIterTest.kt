@@ -5,7 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class EnumIterTest {
-    private enum class Week : IntoEnumIterator<Week> {
+    private enum class Week : IntoEnumIterator {
         SUNDAY,
         MONDAY,
         TUESDAY,
@@ -15,7 +15,7 @@ class EnumIterTest {
         SATURDAY,
         ;
 
-        override fun iter(): Iterator<Week> = entries.iterator()
+        override fun iter(): List<Week> = entries
     }
 
     @Test

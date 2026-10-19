@@ -35,7 +35,7 @@ class StrumTraitsTest {
     @Test
     fun variantIteratorRoundTrip() {
         val color = TestColor.BLUE
-        assertEquals(listOf(TestColor.RED, TestColor.GREEN, TestColor.BLUE), color.iter().asSequence().toList())
+        assertEquals(listOf(TestColor.RED, TestColor.GREEN, TestColor.BLUE), color.iter())
     }
 
     @Test
@@ -50,7 +50,7 @@ class StrumTraitsTest {
     fun enumCountAndVariantNamesAndArray() {
         val ec: EnumCount = TestColor.RED
         val vn: VariantNames = TestColor.RED
-        val va: VariantArray<TestColor> = TestColor.RED
+        val va: VariantArray = TestColor.RED
         assertEquals(3, ec.count)
         assertEquals(listOf("RED", "GREEN", "BLUE"), vn.variantNames)
         assertEquals(listOf(TestColor.RED, TestColor.GREEN, TestColor.BLUE), va.variants)
@@ -58,8 +58,14 @@ class StrumTraitsTest {
 
     @Test
     fun intoDiscriminantReturnsExpected() {
-        val d: IntoDiscriminant<String> = TestColor.GREEN
+        val d: IntoDiscriminant = TestColor.GREEN
         assertEquals("GREEN", d.discriminant())
+    }
+
+    @Test
+    fun asStaticRefReturnsStaticString() {
+        val ref: AsStaticRef = TestColor.RED
+        assertEquals("RED", ref.asStatic())
     }
 
     @Test
@@ -106,19 +112,20 @@ class StrumTraitsTest {
 }
 
 private enum class TestColor :
-    IntoEnumIterator<TestColor>,
-    VariantIterator<TestColor>,
+    IntoEnumIterator,
+    VariantIterator,
     VariantMetadata,
     EnumCount,
     VariantNames,
-    VariantArray<TestColor>,
-    IntoDiscriminant<String> {
+    VariantArray,
+    IntoDiscriminant,
+    AsStaticRef {
     RED,
     GREEN,
     BLUE,
     ;
 
-    override fun iter(): Iterator<TestColor> = entries.iterator()
+    override fun iter(): List<TestColor> = entries
 
     override val variantCount: Int = 3
     override val variantNames: List<String> = listOf("RED", "GREEN", "BLUE")
@@ -126,9 +133,11 @@ private enum class TestColor :
     override fun variantName(): String = name
 
     override val count: Int = 3
-    override val variants: List<TestColor> get() = entries.toList()
+    override val variants: List<TestColor> get() = entries
 
     override fun discriminant(): String = name
+
+    override fun asStatic(): String = name
 }
 
 private enum class TestPet : EnumMessage {

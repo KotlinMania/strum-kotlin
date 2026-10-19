@@ -1,8 +1,4 @@
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.strum
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * Primary annotation for configuring Strum properties on an enum class or its entries.
@@ -10,7 +6,6 @@ import kotlin.native.HiddenFromObjC
  * Can be applied at the enum class level (e.g. [serializeAll], [asciiCaseInsensitive])
  * or on specific enum entries (e.g. [serialize], [toString], [message], [props]).
  */
-@HiddenFromObjC
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FIELD, AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
 public annotation class Strum(
@@ -39,7 +34,6 @@ public annotation class Strum(
 /**
  * Annotation for generating or configuring discriminant enums.
  */
-@HiddenFromObjC
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 public annotation class StrumDiscriminants(
@@ -54,7 +48,6 @@ public annotation class StrumDiscriminants(
 /**
  * Key-value property annotation for [EnumProperty].
  */
-@HiddenFromObjC
 @Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
 @Repeatable

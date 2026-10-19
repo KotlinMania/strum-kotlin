@@ -1,17 +1,10 @@
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.strum
 
-import kotlin.native.HiddenFromObjC
-
 /**
- * Reference conversion interface for static references.
+ * Reference conversion interface for static string references.
+ *
+ * Deprecated in upstream strum 0.22.0 in favor of `IntoStaticStr`.
  */
-@Deprecated(
-    "please use IntoStaticStr derive instead",
-    level = DeprecationLevel.WARNING,
-)
-@HiddenFromObjC
-public interface AsStaticRef<T> {
-    public fun asStatic(): T
+public interface AsStaticRef {
+    public fun asStatic(): String
 }

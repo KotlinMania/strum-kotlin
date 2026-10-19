@@ -1,6 +1,6 @@
 # port-lint Proposed Changes
 
-**Generated:** 2026-10-17
+**Generated:** 2026-10-19
 **Source:** tmp/strum/src
 **Target:** src/commonMain/kotlin/io/github/kotlinmania/strum
 

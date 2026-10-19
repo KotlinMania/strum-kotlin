@@ -1,15 +1,11 @@
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.strum
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * Exception thrown when parsing an enum from a string fails.
  *
  * @property error The underlying [ParseError] describing the failure reason.
  */
-public class ParseException(
+internal class ParseException(
     public val error: ParseError,
     message: String = error.toString(),
 ) : RuntimeException(message) {
@@ -27,5 +23,7 @@ public class ParseException(
 /**
  * Converts a [ParseError] into a [ParseException].
  */
-@HiddenFromObjC
-public fun ParseError.asException(): ParseException = ParseException(this)
+internal fun ParseError.asException(): ParseException = ParseException(this)
+
+@PublishedApi
+internal fun throwVariantNotFound(): Nothing = throw ParseException(ParseError.VARIANT_NOT_FOUND)

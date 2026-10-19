@@ -1,13 +1,8 @@
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.strum
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * Case styles supported by Strum for `serialize_all` and string conversions.
  */
-@HiddenFromObjC
 public enum class CaseStyle {
     CAMEL_CASE,
     PASCAL_CASE,
@@ -136,7 +131,6 @@ public enum class CaseStyle {
  * Converts [input] according to the case style named by [styleName].
  * If [styleName] is unrecognized or blank, returns [input] unchanged.
  */
-@HiddenFromObjC
 public fun convertCase(input: String, styleName: String): String {
     val style = CaseStyle.fromStyleName(styleName) ?: return input
     return style.convert(input)
