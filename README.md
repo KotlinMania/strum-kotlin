@@ -37,6 +37,8 @@ dependencies {
 }
 ```
 
+The runtime artifact does not depend on the derive toolchain. Macro-generation APIs are provided separately by `strum-macros-kotlin`; import their canonical `io.github.kotlinmania.strummacros` packages when using that tooling.
+
 ### Version Catalog (`gradle/libs.versions.toml`)
 
 ```toml

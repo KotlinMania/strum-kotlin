@@ -10,7 +10,6 @@ ktlint = "14.2.0"
 ktlintEngine = "1.8.0"
 kotlinxBenchmark = "0.5.0"
 strumMacros = "0.2.0"
-syn = "0.2.0"
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -29,15 +28,6 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "collectionsImmutable" }
 kotlinx-benchmark-runtime = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "kotlinxBenchmark" }
 strum-macros = { module = "io.github.kotlinmania:strum-macros-kotlin", version.ref = "strumMacros" }
-syn = { module = "io.github.kotlinmania:syn-kotlin", version.ref = "syn" }
 
 [bundles]
-strum-kotlin-commonMain = [
-  "kotlinx-coroutines-core",
-  "kotlinx-serialization-core",
-  "kotlinx-serialization-json",
-  "kotlinx-datetime",
-  "collections-immutable",
-  "strum-macros",
-  "syn",
-]
+strum-kotlin-commonMain = []

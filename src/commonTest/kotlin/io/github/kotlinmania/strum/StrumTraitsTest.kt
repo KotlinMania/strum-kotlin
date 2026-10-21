@@ -103,12 +103,6 @@ class StrumTraitsTest {
         assertEquals("2:30", science.getStr("Time"))
         assertEquals(true, science.getBool("mandatory"))
     }
-
-    @Test
-    fun macroReExportsAvailable() {
-        val err = MacroHelpers.nonEnumError()
-        assertEquals(true, err.toString().isNotEmpty())
-    }
 }
 
 private enum class TestColor :
