@@ -3,11 +3,6 @@ import Strum
 
 @Suite("Strum Swift Export Tests")
 struct StrumExportTests {
-    @Test("Strum Swift module imports cleanly")
-    func swiftModuleLoads() {
-        #expect(Bool(true))
-    }
-
     @Test("ParseError export works")
     func parseErrorExport() {
         let err = ParseError.VARIANT_NOT_FOUND
