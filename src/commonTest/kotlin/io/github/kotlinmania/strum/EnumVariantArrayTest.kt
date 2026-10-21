@@ -6,7 +6,7 @@ import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
 class EnumVariantArrayTest {
-    private enum class Operation : VariantArray {
+    private enum class Operation : VariantArray<Operation> {
         ADD,
         SUB,
         MUL,
@@ -38,7 +38,7 @@ class EnumVariantArrayTest {
 
     private enum class WeekDay(
         val value: Int,
-    ) : VariantArray {
+    ) : VariantArray<WeekDay> {
         SUNDAY(0),
         MONDAY(1),
         TUESDAY(2),

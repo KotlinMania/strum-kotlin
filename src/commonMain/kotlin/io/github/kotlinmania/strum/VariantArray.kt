@@ -1,8 +1,6 @@
 package io.github.kotlinmania.strum
 
-/**
- * Interface retrieving an array or list containing all variants of an enum.
- */
-public interface VariantArray {
-    public val variants: List<Any>
+/** Retrieves the immutable sequence of variants with their concrete type. */
+public interface VariantArray<out E> {
+    public val variants: List<E>
 }

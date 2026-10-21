@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 class EnumCountTest {
     private enum class Week :
         EnumCount,
-        IntoEnumIterator {
+        IntoEnumIterator<Week, EnumIterator<Week>> {
         SUNDAY,
         MONDAY,
         TUESDAY,
@@ -19,7 +19,7 @@ class EnumCountTest {
 
         override val count: Int get() = COUNT
 
-        override fun iter(): List<Week> = entries
+        override fun iter(): EnumIterator<Week> = EnumIterator.from(entries)
 
         companion object {
             const val COUNT: Int = 7
@@ -28,7 +28,7 @@ class EnumCountTest {
 
     private enum class Pets :
         EnumCount,
-        IntoEnumIterator {
+        IntoEnumIterator<Pets, EnumIterator<Pets>> {
         DOG,
         CAT,
         FISH,
@@ -40,8 +40,8 @@ class EnumCountTest {
 
         override val count: Int get() = COUNT
 
-        override fun iter(): List<Pets> =
-            entries.filter { it != HAMSTER }
+        override fun iter(): EnumIterator<Pets> =
+            EnumIterator.from(entries.filter { it != HAMSTER })
 
         companion object {
             const val COUNT: Int = 4

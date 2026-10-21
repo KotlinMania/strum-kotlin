@@ -1,15 +1,11 @@
 package io.github.kotlinmania.strum
 
-/**
- * Designates that an enum can be iterated over.
- */
-public interface IntoEnumIterator {
-    public fun iter(): List<Any>
+/** Designates that a value supplies a typed, cloneable, double-ended enum iterator. */
+public interface IntoEnumIterator<E : Any, I : EnumIteratorContract<E, I>> {
+    public fun iter(): I
 }
 
-/**
- * Iterator interface over enum variants.
- */
-public interface VariantIterator {
-    public fun iter(): List<Any>
+/** Supplies an iterator whose elements have the same type as the value. */
+public interface VariantIterator<E, I : Iterator<E>> {
+    public fun iter(): I
 }

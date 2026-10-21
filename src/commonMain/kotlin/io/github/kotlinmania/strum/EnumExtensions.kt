@@ -3,7 +3,7 @@ package io.github.kotlinmania.strum
 /**
  * Returns an iterator over all entries of the enum [E].
  */
-public inline fun <reified E : Enum<E>> enumIter(): Iterator<E> = enumValues<E>().iterator()
+public inline fun <reified E : Enum<E>> enumIter(): EnumIterator<E> = EnumIterator.from(enumValues<E>().toList())
 
 /**
  * Returns the count of variants in enum [E].

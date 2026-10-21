@@ -1,10 +1,10 @@
 package io.github.kotlinmania.strum
 
 /**
- * Reference conversion interface for static string references.
+ * A reference-to-reference conversion preserving the referenced type.
  *
  * Deprecated in upstream strum 0.22.0 in favor of `IntoStaticStr`.
  */
-public interface AsStaticRef {
-    public fun asStatic(): String
+public interface AsStaticRef<out T> {
+    public fun asStatic(): T
 }

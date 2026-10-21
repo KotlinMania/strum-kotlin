@@ -20,6 +20,7 @@ Whether you need string parsing with aliases, case conversions (`kebab-case`, `s
 - **Variant Messages & Docs**: Attach user-facing messages, detailed descriptions, and structured documentation to enum variants via `EnumMessage`.
 - **Variant Properties**: Store string, numeric, and boolean properties directly with enum entries via `EnumProperty`.
 - **Idiomatic Iteration & Counting**: Generic reified helpers for iterating (`enumIter`), counting (`enumCount`), retrieving names (`enumVariantNames`), and ordinal indexing (`fromRepr`).
+- **Typed Variant Contracts**: Iterator element and clone types, discriminant types and referenced object types remain generic. Enum iterators support cloning, reverse traversal, exact remaining length and fused exhaustion; indexed factories construct data-bearing values on demand.
 - **Annotations**: Declarative `@Strum`, `@StrumDiscriminants`, and `@StrumProp` annotations to configure serialization, display formatting, and properties.
 - **Swift & Native Interop**: Fully compatible with Kotlin 2.4 Swift Export and Apple SPM / XCFramework packaging.
 
